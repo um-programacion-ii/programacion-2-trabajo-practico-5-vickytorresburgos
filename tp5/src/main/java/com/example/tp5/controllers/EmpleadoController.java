@@ -54,8 +54,8 @@ public class EmpleadoController {
 
     @GetMapping("/salario")
     public List<Empleado> obtenerPorRangoSalario(
-            @RequestParam BigDecimal min,
-            @RequestParam BigDecimal max) {
+            @RequestParam Double min,
+            @RequestParam Double max) {
         return empleadoService.buscarPorRangoSalario(min, max);
     }
 }

@@ -58,7 +58,7 @@ public class EmpleadoControllerTest {
         empleadoTest.setNombre("Valentina");
         empleadoTest.setDepartamento(departamentoTest);
         empleadoTest.setEmail("valeartola@it.com");
-        empleadoTest.setSalario(new BigDecimal(10000));
+        empleadoTest.setSalario(10000.0);
         empleadoTest.setFechaContratacion(LocalDate.now());
         empleadoTest.setDepartamento(departamentoTest);
         empleadoTest.setProyectos(Collections.emptySet());
@@ -98,7 +98,7 @@ public class EmpleadoControllerTest {
 
     @Test
     void testObtenerPorRangoSalario() throws Exception {
-        given(empleadoService.buscarPorRangoSalario(new BigDecimal(20), new BigDecimal(50000))).willReturn(List.of(empleadoTest));
+        given(empleadoService.buscarPorRangoSalario(20.0, 50000.0)).willReturn(List.of(empleadoTest));
 
         mockMvc.perform(get("/api/empleados/salario")
                         .param("min", "20")
@@ -145,14 +145,14 @@ public class EmpleadoControllerTest {
     @Test
     void testActualizarEmpleado() throws Exception {
         Empleado empleadoActualizado = new Empleado(1L, "Valentina", "Artola",
-                "valeartola@it.com",LocalDate.now(), new BigDecimal(20000), departamentoTest, Collections.emptySet());
+                "valeartola@it.com",LocalDate.now(), 20000.0, departamentoTest, Collections.emptySet());
         given(empleadoService.actualizar(anyLong(), any(Empleado.class))).willReturn(empleadoActualizado);
 
         mockMvc.perform(put("/api/empleados/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(empleadoActualizado)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.salario", is(20000)));
+                .andExpect(jsonPath("$.salario", is(20000.0)));
     }
 
     @Test

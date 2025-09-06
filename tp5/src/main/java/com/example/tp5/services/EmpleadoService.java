@@ -9,7 +9,7 @@ public interface EmpleadoService {
     Empleado guardar(Empleado empleado);
     Empleado buscarPorId(Long id);
     List<Empleado> buscarPorDepartamento(String nombreDepartamento);
-    List<Empleado> buscarPorRangoSalario(BigDecimal salarioMin, BigDecimal salarioMax);
+    List<Empleado> buscarPorRangoSalario(Double salarioMin, Double salarioMax);
     Double obtenerSalarioPromedioPorDepartamento(Long departamentoId);
     List<Empleado> obtenerTodos();
     Empleado actualizar(Long id, Empleado empleado);

@@ -43,7 +43,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public List<Empleado> buscarPorRangoSalario(BigDecimal salarioMin, BigDecimal salarioMax) {
+    public List<Empleado> buscarPorRangoSalario(Double salarioMin, Double salarioMax) {
         return empleadoRepository.findBySalarioBetween(salarioMin, salarioMax);
     }
 

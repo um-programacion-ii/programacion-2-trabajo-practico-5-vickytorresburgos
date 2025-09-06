@@ -37,5 +37,4 @@ public class ProyectoRepositoryTest {
         assertEquals(1, proyectosActivos.size());
         assertEquals("Proyecto Activo", proyectosActivos.get(0).getNombre());
     }
-
 }
