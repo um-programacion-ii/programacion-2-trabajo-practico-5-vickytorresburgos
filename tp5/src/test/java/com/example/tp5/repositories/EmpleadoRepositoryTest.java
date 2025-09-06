@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +30,7 @@ public class EmpleadoRepositoryTest {
         empleado.setApellido("Drube");
         empleado.setEmail("tadeo@email.com");
         empleado.setFechaContratacion(LocalDate.now());
-        empleado.setSalario(new BigDecimal(5000000));
+        empleado.setSalario(5000000.0);
         empleadoRepository.save(empleado);
 
         Optional<Empleado> empleadosPorMail = empleadoRepository.findByEmail("tadeo@email.com");
@@ -53,7 +52,7 @@ public class EmpleadoRepositoryTest {
         empleado.setApellido("Drube");
         empleado.setEmail("tadeo@email.com");
         empleado.setFechaContratacion(LocalDate.now());
-        empleado.setSalario(new BigDecimal(5000000));
+        empleado.setSalario(5000000.0);
         empleado.setDepartamento(departamento);
         empleadoRepository.save(empleado);
 
@@ -69,14 +68,14 @@ public class EmpleadoRepositoryTest {
         empleado.setApellido("Drube");
         empleado.setEmail("tadeo@email.com");
         empleado.setFechaContratacion(LocalDate.now());
-        empleado.setSalario(new BigDecimal(5000000));
+        empleado.setSalario(5000000.0);
         empleadoRepository.save(empleado);
 
-        List<Empleado> empleadosPorRangoSalario = empleadoRepository.findBySalarioBetween(new BigDecimal(200), new BigDecimal(6000000));
+        List<Empleado> empleadosPorRangoSalario = empleadoRepository.findBySalarioBetween(200.0, 6000000.0);
 
         assertEquals(1, empleadosPorRangoSalario.size());
         assertEquals("Tadeo", empleadosPorRangoSalario.get(0).getNombre());
-        assertEquals(new BigDecimal(5000000), empleadosPorRangoSalario.get(0).getSalario());
+        assertEquals(5000000.0, empleadosPorRangoSalario.get(0).getSalario());
     }
 
     @Test
@@ -86,7 +85,7 @@ public class EmpleadoRepositoryTest {
         empleado1.setApellido("Torres");
         empleado1.setEmail("vicky@email.com");
         empleado1.setFechaContratacion(LocalDate.now().minusDays(5));
-        empleado1.setSalario(new BigDecimal(6000000));
+        empleado1.setSalario(6000000.0);
         empleadoRepository.save(empleado1);
 
         Empleado empleado2 = new Empleado();
@@ -94,7 +93,7 @@ public class EmpleadoRepositoryTest {
         empleado2.setApellido("Drube");
         empleado2.setEmail("tadeo@email.com");
         empleado2.setFechaContratacion(LocalDate.now().minusDays(10));
-        empleado2.setSalario(new BigDecimal(5000000));
+        empleado2.setSalario(5000000.0);
         empleadoRepository.save(empleado2);
 
         List<Empleado> empleadosPorFechaContratacion = empleadoRepository.findByFechaContratacionAfter(LocalDate.now().minusDays(8));
@@ -114,7 +113,9 @@ public class EmpleadoRepositoryTest {
         empleado.setNombre("Victoria");
         empleado.setApellido("Torres");
         empleado.setEmail("vicky@email.com");
-        empleado.setSalario(new BigDecimal(6000000));
+        empleado.setSalario(6000000.0);
+        empleado.setFechaContratacion(LocalDate.now());
+        empleado.setDepartamento(departamento);
         empleadoRepository.save(empleado);
 
         List<Empleado> empleados = empleadoRepository.findByNombreDepartamento("RRHH");
@@ -135,7 +136,7 @@ public class EmpleadoRepositoryTest {
         empleado1.setApellido("Torres");
         empleado1.setEmail("vicky@email.com");
         empleado1.setFechaContratacion(LocalDate.now());
-        empleado1.setSalario(new BigDecimal(6000000));
+        empleado1.setSalario(6000000.0);
         empleado1.setDepartamento(departamento);
         empleadoRepository.save(empleado1);
 
@@ -144,7 +145,7 @@ public class EmpleadoRepositoryTest {
         empleado2.setApellido("Drube");
         empleado2.setEmail("tadeo@email.com");
         empleado2.setFechaContratacion(LocalDate.now());
-        empleado2.setSalario(new BigDecimal(5000000));
+        empleado2.setSalario(5000000.0);
         empleado2.setDepartamento(departamento);
         empleadoRepository.save(empleado2);
 
