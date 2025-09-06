@@ -26,7 +26,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public Empleado guardar(Empleado empleado) {
         if (empleadoRepository.findByEmail(empleado.getEmail()).isPresent()) {
-            throw new EmailDuplicadoException("El email ya está registrado: " + empleado.getEmail());
+            throw new EmailDuplicadoException("El email" + empleado.getEmail() + " ya esta registrado");
         }
         return empleadoRepository.save(empleado);
     }
@@ -34,7 +34,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public Empleado buscarPorId(Long id) {
         return empleadoRepository.findById(id)
-                .orElseThrow(() -> new EmpleadoNoEncontradoException("Empleado no encontrado con ID: " + id));
+                .orElseThrow(() -> new EmpleadoNoEncontradoException("No se encontro el empleado con el ID: " + id));
     }
 
     @Override
@@ -48,9 +48,9 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public BigDecimal obtenerSalarioPromedioPorDepartamento(Long departamentoId) {
+    public Double obtenerSalarioPromedioPorDepartamento(Long departamentoId) {
         return empleadoRepository.findAverageSalarioByDepartamento(departamentoId)
-                .orElse(BigDecimal.ZERO);
+                .orElse(Double.NaN);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public Empleado actualizar(Long id, Empleado empleado) {
         if (!empleadoRepository.existsById(id)) {
-            throw new EmpleadoNoEncontradoException("Empleado no encontrado con ID: " + id);
+            throw new EmpleadoNoEncontradoException("No se encontro el empleado con el ID: " + id);
         }
         empleado.setId(id);
         return empleadoRepository.save(empleado);
@@ -70,7 +70,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     @Override
     public void eliminar(Long id) {
         if (!empleadoRepository.existsById(id)) {
-            throw new EmpleadoNoEncontradoException("Empleado no encontrado con ID: " + id);
+            throw new EmpleadoNoEncontradoException("No se encontro el empleado con el ID: " + id);
         }
         empleadoRepository.deleteById(id);
     }

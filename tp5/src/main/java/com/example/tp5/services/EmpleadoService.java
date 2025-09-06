@@ -10,7 +10,7 @@ public interface EmpleadoService {
     Empleado buscarPorId(Long id);
     List<Empleado> buscarPorDepartamento(String nombreDepartamento);
     List<Empleado> buscarPorRangoSalario(BigDecimal salarioMin, BigDecimal salarioMax);
-    BigDecimal obtenerSalarioPromedioPorDepartamento(Long departamentoId);
+    Double obtenerSalarioPromedioPorDepartamento(Long departamentoId);
     List<Empleado> obtenerTodos();
     Empleado actualizar(Long id, Empleado empleado);
     void eliminar(Long id);

@@ -23,5 +23,5 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Long> {
     List<Empleado> findByNombreDepartamento(@Param("nombreDepartamento") String nombreDepartamento);
 
     @Query("SELECT AVG(e.salario) FROM Empleado e WHERE e.departamento.id = :departamentoId")
-    Optional<BigDecimal> findAverageSalarioByDepartamento(@Param("departamentoId") Long departamentoId);
+    Optional<Double> findAverageSalarioByDepartamento(@Param("departamentoId") Long departamentoId);
 }
