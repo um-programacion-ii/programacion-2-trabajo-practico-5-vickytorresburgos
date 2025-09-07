@@ -1,11 +1,13 @@
-package com.example.tp5.repositories;
+package com.example.tp5.repositories.empleado;
 
 import com.example.tp5.models.Departamento;
 import com.example.tp5.models.Empleado;
+import com.example.tp5.repositories.DepartamentoRepository;
+import com.example.tp5.repositories.EmpleadoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,9 +16,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@ActiveProfiles("h2")
-
-public class EmpleadoRepositoryTest {
+@Transactional
+public abstract class AbstractEmpleadoRepositoryTest {
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
