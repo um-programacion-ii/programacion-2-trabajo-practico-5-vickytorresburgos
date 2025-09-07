@@ -1,9 +1,10 @@
-package com.example.tp5.repositories;
+package com.example.tp5.repositories.departamento;
 
 import com.example.tp5.models.Departamento;
+import com.example.tp5.repositories.DepartamentoRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
@@ -12,8 +13,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-@ActiveProfiles("h2")
-public class DepartamentoRepositoryTest {
+@Transactional
+public abstract class AbstractDepartamentoRepositoryTest {
 
     @Autowired
     private DepartamentoRepository departamentoRepository;

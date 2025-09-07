@@ -1,3 +1,4 @@
+# activa perfil de postgresql
 spring:
   config:
     activate:

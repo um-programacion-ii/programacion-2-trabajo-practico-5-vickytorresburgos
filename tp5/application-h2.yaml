@@ -1,4 +1,7 @@
 spring:
+  config:
+    activate:
+      on-profile: h2
   docker:
     compose:
       enabled: false

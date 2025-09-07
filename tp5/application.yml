@@ -1,3 +1,4 @@
+# perfil activo por defecto
 spring:
   profiles:
     active: dev

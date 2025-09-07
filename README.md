@@ -110,8 +110,8 @@ Desarrollar un sistema de gestión de empleados utilizando Spring Boot con JPA, 
 > 💡 **Nota**: Esta estimación considera la complejidad de configurar múltiples bases de datos, Docker y el aprendizaje de JPA. El tiempo incluye la configuración de profiles y la containerización de las bases de datos.
 
 ## 👨‍🎓 Información del Alumno
-- **Nombre y Apellido**: [Nombre y Apellido del Alumno]
-- **Legajo**: [Número de Legajo]
+- **Nombre y Apellido**: Torres Burgos Maria Victoria
+- **Legajo**: 62092
 
 > ⚠️ **IMPORTANTE**: Este trabajo práctico se realiza **INDIVIDUALMENTE**. Aunque se utilizan herramientas de colaboración como Pull Requests y Code Review, estas son para mantener buenas prácticas de desarrollo y un historial ordenado. Todo el desarrollo debe ser realizado por el mismo estudiante.
 
@@ -1057,6 +1057,125 @@ Cada archivo debe seguir este formato:
 
 ## Prompt 2: [Descripción breve]
 [Repetir estructura para cada prompt]
+```
+
+## Instrucciones de instalación
+
+1. Clonar el repositorio
+
+```
+git clone <url_repositorio>
+cd tp5
+```
+2. Ejecución 
+
+2.1. Ejecución con el perfil dev:
+
+```
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+```
+
+- La aplicación estará disponible en: http://localhost:8080
+- Acceso a la consola H2: http://localhost:8080/h2-console
+- JDBC URL: jdbc:h2:mem:testdb 
+- Usuario: sa 
+- Contraseña: (vacío)
+
+2.2. Ejecución con MySQL
+```
+./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql
+````
+
+2.3. Ejecución con PostgreSQL:
+
+1. Limpia el entorno anterior (si es necesario):
+```
+./mvnw spring-boot:run -Dspring-boot.run.profiles=postgres
+````
+
+3. Ejecutar Tests
+```
+mvn test
+````
+
+## Requisitos del sistema
+Antes de comenzar, asegurate de tener instalado:
+- **Java 21** o superior
+```
+java -version
+````
+- **Maven 3.9+**
+```
+mvn -v
+````
+- **Docker y Docker Compose**
+- **Git**
+
+### Ejemplos de uso
+### Documentación de endpoints
+**Departamento**
+
+| Método | URL                       | Descripción                                  | Cuerpo                                                                  | Respuesta                |
+| ------ | ------------------------- |----------------------------------------------| ----------------------------------------------------------------------- | ------------------------ |
+| GET    | `/api/departamentos`      | Obtener una lista de todos los departamentos | –                                                                       | Lista de departamentos   |
+| GET    | `/api/departamentos/{id}` | Obtener un departamento por ID               | –                                                                       | Departamento             |
+| POST   | `/api/departamentos`      | Crear un nuevo departamento                  | `{ "nombre": "Ventas", "descripcion": "Departamento de ventas" }`       | Departamento creado      |
+| PUT    | `/api/departamentos/{id}` | Actualizar un departamento                   | `{ "nombre": "Marketing", "descripcion": "Departamento de marketing" }` | Departamento actualizado |
+| DELETE | `/api/departamentos/{id}` | Eliminar un departamento                     | –                                                                       | 204 No Content           |
+
+**Empleado**
+
+| Método | URL                                          | Descripción                                  | Cuerpo / Parámetros                                                                        | Respuesta            |
+| ------ | -------------------------------------------- |----------------------------------------------| ------------------------------------------------------------------------------------------ | -------------------- |
+| GET    | `/api/empleados`                             | Obtener una lista de todos los empleados     | –                                                                                          | Lista de empleados   |
+| GET    | `/api/empleados/{id}`                        | Obtener un empleado por ID                   | –                                                                                          | Empleado             |
+| POST   | `/api/empleados`                             | Crear un empleado                            | `{ "nombre": "Juan", "apellido": "Pérez", "salario": 50000, "departamento": { "id": 1 } }` | Empleado creado      |
+| PUT    | `/api/empleados/{id}`                        | Actualizar un empleado                       | `{ "nombre": "Juan", "apellido": "Pérez", "salario": 55000, "departamento": { "id": 1 } }` | Empleado actualizado |
+| DELETE | `/api/empleados/{id}`                        | Eliminar un empleado                         | –                                                                                          | 204 No Content       |
+| GET    | `/api/empleados/departamento/{nombre}`       | Obtener empleados por nombre de departamento | –                                                                                          | Lista de empleados   |
+| GET    | `/api/empleados/salario?min={min}&max={max}` | Obtener empleados por rango salarial         | `min=40000&max=60000`                                                                      | Lista de empleados   |
+
+**Proyecto**
+
+| Método | URL                                     | Descripción                               | Cuerpo / Parámetros                                                     | Respuesta                  |
+| ------ | --------------------------------------- | ----------------------------------------- |-------------------------------------------------------------------------|----------------------------|
+| GET    | `/api/proyectos`                        | Obtener todos los proyectos               | –                                                                       | Lista de proyectos         |
+| GET    | `/api/proyectos/{id}`                   | Obtener un proyecto por ID                | –                                                                       | Proyecto                   |
+| POST   | `/api/proyectos`                        | Crear un proyecto                         | `{ "nombre": "Proyecto A", "descripcion": "Descripción del proyecto" }` | Proyecto creado            |
+| PUT    | `/api/proyectos/{id}`                   | Actualizar un proyecto                    | `{ "nombre": "Proyecto B", "descripcion": "Nueva descripción" }`        | Proyecto actualizado       |
+| DELETE | `/api/proyectos/{id}`                   | Eliminar un proyecto                      | –                                                                       | 204 No Content             |
+| GET    | `/api/proyectos/empleado/{idEmpleado}`  | Obtener proyectos asignados a un empleado | –                                                                       | Lista de proyectos         |
+| GET    | `/api/proyectos/estado?estado={estado}` | Filtrar proyectos por estado              | `estado=activo`                                                         | Lista de proyectos activos |
+
+### Instrucciones para Docker
+
+### 1. Requisitos previos
+- Puerto 3306 (MySQL) y 5432 (PostgreSQL) libres.
+
+### 2. Levantar las bases de datos con Docker Compose
+
+Ejecutar los siguientes comandos desde la carpeta src:
+
+```
+# Iniciar los contenedores de MySQL y PostgreSQL
+docker compose up -d
+
+# Verificar el estado de los contenedores
+docker compose ps
+
+# (Opcional) Ver logs en tiempo real
+docker compose logs -f
+```
+
+
+### 3. Detener y limpiar contenedores
+
+```
+# Detener los contenedores
+docker compose down
+
+# Detener y eliminar los volúmenes de datos
+docker compose down -v
 ```
 
 ## 📝 Licencia

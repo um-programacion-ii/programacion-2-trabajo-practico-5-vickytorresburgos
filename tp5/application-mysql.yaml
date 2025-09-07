@@ -1,3 +1,4 @@
+# activa perfil de mysql
 spring:
   config:
     activate:

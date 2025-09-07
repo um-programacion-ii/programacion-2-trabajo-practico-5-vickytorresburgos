@@ -1,19 +1,21 @@
-package com.example.tp5.repositories;
+package com.example.tp5.repositories.proyecto;
 
 import com.example.tp5.models.Proyecto;
+import com.example.tp5.repositories.ProyectoRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DataJpaTest
-@ActiveProfiles("h2")
-public class ProyectoRepositoryTest {
+@Transactional
+public abstract class AbstractProyectoRepositoryTest {
     @Autowired
     private ProyectoRepository proyectoRepository;
 
