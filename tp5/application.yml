@@ -1,0 +1,7 @@
+# perfil activo por defecto
+spring:
+  profiles:
+    active: dev
+  docker:
+    compose:
+      enabled: false
